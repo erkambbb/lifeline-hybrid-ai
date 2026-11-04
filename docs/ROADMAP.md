@@ -9,21 +9,32 @@
 
 Hedefimiz 29 Kasım akşamı teslim etmek. Yarışmaya her şey İngilizce gönderilir.
 
-## 9 Kasım'dan önce (şu an)
+## Durum (4 Kasım)
 
-Yalnızca altyapı, araştırma ve iskelet. Ana özellik yok.
+Plan değişti: ana özellikler 9 Kasım'ı beklemeden yazıldı.
 
-- [x] Fikir, araştırma, repo, iskelet, ders planı
-- [x] Türkçe ve İngilizce dil altyapısı
-- [x] Otomatik derleme (GitHub Actions)
-- [x] Translator API çevrimdışı testi
-- [x] Devpost taslağı (`docs/SUBMISSION.md`) ve izin e-postaları (`docs/OUTREACH.md`)
-- [ ] Firebase kurulumu (`docs/FIREBASE_SETUP.md`)
+⚠️ **Kural riski.** Yarışma, teslim döneminde önemli yeni geliştirme şartı koyuyor.
+Bu commit'ler 9 Kasım'dan önce tarihli. Kurallar çıkınca ilk iş bunu kontrol et. Teslim
+metninde 9 Kasım öncesi ve sonrası yapılanları açıkça ayır.
+
+**Bitti:**
+
+- [x] Fikir, araştırma, repo, ders planı, otomatik derleme
+- [x] Türkçe ve İngilizce arayüz, Türkçe adıyla Can Hattı
+- [x] 15 kaynaklı bilgi kartı, modelsiz çevrimdışı arama
+- [x] Hibrit kart seçimi ve yedek zinciri (cihaz, bulut, yerel arama)
+- [x] Yardım mesajı: bilgi çıkarma, konum, `sms:` bağlantısı
+- [x] Hazırlık: çevrimdışı hazırlık, afet çantası, aile planı
+- [x] Devpost taslağı ve izin e-postası taslakları
+
+**Yapılmadı, sana bağlı:**
+
 - [ ] Devpost'ta **Join hackathon**
-- [ ] `docs/LEARNING.md` derslerine başla
+- [ ] Firebase kurulumu (`docs/FIREBASE_SETUP.md`)
+- [ ] Kart seçiminin gerçek modelle testi: ağır uygulamaları kapat
 - [ ] Kurumlara izin e-postası at (`docs/OUTREACH.md`)
-- [ ] Son test: ağır uygulamaları kapat, çevrimdışı 📱 Cihazda cevabını gör
-      (`docs/RESEARCH.md`, bölüm 8)
+- [ ] Kartları sağlık eğitimli birine incelet
+- [ ] `docs/LEARNING.md` derslerine başla
 
 ## 9 Kasım kontrol listesi
 
@@ -38,29 +49,24 @@ Kurallar bu gün yayınlanıyor. Kod yazmadan önce oku.
 - [ ] Jüri kriterleri değişti mi? Şu an dört kriter var: Technological
       Implementation, Design, Potential Impact, Quality of the Idea.
 
-## Hafta 1 (9-15 Kasım): ana özellikler
+## Hafta 1 (9-15 Kasım): gerçek modelle doğrulama
 
-Amaç: üç katman uçtan uca çalışsın, içerik henüz az olsun.
+Amaç: yazılan hibrit yolu gerçek cihaz ve bulutla kanıtlamak, teslim dönemi işlerini
+başlatmak.
 
-- [ ] Bilgi tabanı şeması ve 3 örnek kart (kanama, enkaz altı, gaz kokusu)
-- [ ] Katman 3: modelsiz çevrimdışı arama (Türkçe anahtar kelime)
-- [ ] Katman 1-2: hibrit kart seçimi (enum çıktı)
-- [ ] Translator API ile `tr → en` köprüsü
-- [ ] Yerel aramayı Türkçe orijinal metinde de çalıştır (çeviri hatasına karşı)
-- [ ] Yedek zinciri: cihaz hata verirse bulut, o da olmazsa yerel arama
-- [ ] Hibrit gösterge: 📱 Cihazda, ☁️ Bulutta, 📚 Çevrimdışı kütüphane
-- [ ] Yardım mesajı oluşturucu: yapılandırılmış çıkarım, konum, `sms:` bağlantısı
-- [ ] Modelin ön indirilmesi için ilk kurulum akışı
+- [ ] Cihaz ve bulutta kart seçimi, enum ve JSON çıktısı testi
+- [ ] İlk kurulum akışı: yeni kullanıcıyı Hazırlık sekmesine yönlendirme
+- [ ] Bonus görevler çıktıysa planı onlara göre değiştir
+- [ ] Ağ durumuna göre daha akıllı yönlendirme denemesi
 
 ## Hafta 2 (16-22 Kasım): bilgi tabanı ve cila
 
 Amaç: içerik güvenilir olsun, ürün bütünlüklü görünsün.
 
-- [ ] 15-20 bilgi kartı, Türkçe ve İngilizce, her biri kaynaklı
-- [ ] Kartların sağlık bilgisi olan biri tarafından gözden geçirilmesi
-- [ ] Hazırlık modu: deprem çantası listesi ve aile planı
-- [ ] Panik dostu tasarım: büyük düğmeler, kısa metin, yüksek kontrast
-- [ ] Erişilebilirlik ve telefon genişliği kontrolü
+- [ ] Sağlıkçı incelemesinden gelen düzeltmeler, inceleme uyarısının kaldırılması
+- [ ] Yangın gibi eksik konular için kaynaklı yeni kartlar
+- [ ] Yerel aramaya gerçek kullanıcı cümleleriyle yeni sözcükler
+- [ ] Erişilebilirlik kontrolü
 
 ## Hafta 3 (23-30 Kasım): test, video, Devpost
 
