@@ -9,14 +9,14 @@ export default defineConfig({
       registerType: "autoUpdate",
 
       manifest: {
-        name: "Lifeline",
-        short_name: "Lifeline",
-        description: "Çevrimdışı öncelikli hibrit yapay zekâ afet asistanı",
+        name: "Can Hattı",
+        short_name: "Can Hattı",
+        description: "İnternet kesildiğinde de çalışan afet asistanı",
         lang: "tr",
         start_url: "/",
         display: "standalone",
-        background_color: "#14161a",
-        theme_color: "#14161a",
+        background_color: "#0b6b4f",
+        theme_color: "#0b6b4f",
         icons: [
           { src: "icons/icon-192.png", sizes: "192x192", type: "image/png" },
           { src: "icons/icon-512.png", sizes: "512x512", type: "image/png" },
@@ -33,7 +33,7 @@ export default defineConfig({
         // Precache: bu dosyaların hepsi kurulum anında önbelleğe indirilir.
         // NEDEN: İnternet kesildikten sonra indirme şansımız olmaz. Uygulama
         // ve (ileride) bilgi tabanı, kriz başlamadan telefonda olmalıdır.
-        globPatterns: ["**/*.{js,css,html,svg,png,webmanifest}"],
+        globPatterns: ["**/*.{js,css,html,svg,png,webmanifest,woff2}"],
       },
     }),
   ],
