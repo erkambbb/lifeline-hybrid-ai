@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 270" role="img" aria-label="Three layers. Cloud: Gemini Flash on any online device. On-device: Gemini Nano on desktop Chrome with no network. Offline library: local search on any device with no model.">
+  <style>
+    .t{font-family:Inter,'Segoe UI',system-ui,-apple-system,Helvetica,Arial,sans-serif;fill:#46405C}
+    .h{font-size:30px;font-weight:700}
+    .s{font-size:21px;font-weight:600;fill:#655E7E}
+    .d{font-size:20px;fill:#655E7E}
+    .i{fill:none;stroke:#46405C;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;opacity:.75}
+  </style>
+  <g>
+    <rect x="0" y="0" width="384" height="270" rx="24" fill="#D5EDF7"/>
+    <path class="i" d="M50 92h66a24 24 0 0 0 3-48 34 34 0 0 0-65-7 28 28 0 0 0-4 55z"/>
+    <text class="t h" x="36" y="150">Cloud</text>
+    <text class="t s" x="36" y="186">Gemini Flash</text>
+    <text class="t d" x="36" y="226">Any device with a connection</text>
+  </g>
+  <g transform="translate(408 0)">
+    <rect x="0" y="0" width="384" height="270" rx="24" fill="#E6DCF8"/>
+    <rect class="i" x="36" y="30" width="96" height="62" rx="8"/>
+    <path class="i" d="M24 106h120"/>
+    <text class="t h" x="36" y="150">On-device</text>
+    <text class="t s" x="36" y="186">Gemini Nano</text>
+    <text class="t d" x="36" y="226">Desktop Chrome, no network</text>
+  </g>
+  <g transform="translate(816 0)">
+    <rect x="0" y="0" width="384" height="270" rx="24" fill="#D3F0E2"/>
+    <path class="i" d="M84 44c-14-12-32-14-48-10v62c16-4 34-2 48 10 14-12 32-14 48-10V34c-16-4-34-2-48 10zM84 44v62"/>
+    <text class="t h" x="36" y="150">Offline library</text>
+    <text class="t s" x="36" y="186">Local search</text>
+    <text class="t d" x="36" y="226">Any device, no model needed</text>
+  </g>
+</svg>

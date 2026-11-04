@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 372" role="img" aria-label="Planned features: emergency guide, help message builder, source indicator, and preparedness mode.">
+  <style>
+    .t{font-family:Inter,'Segoe UI',system-ui,-apple-system,Helvetica,Arial,sans-serif}
+    .h{font-size:28px;font-weight:700;fill:#46405C}
+    .d{font-size:21px;fill:#655E7E}
+  </style>
+  <rect width="588" height="174" rx="22" fill="#FFE3D1"/>
+  <text class="t h" x="34" y="62">Emergency guide</text>
+  <text class="t d" x="34" y="102">Calm, step-by-step cards from trusted sources,</text>
+  <text class="t d" x="34" y="132">each with its source and a Call 112 reminder.</text>
+  <rect x="612" width="588" height="174" rx="22" fill="#FBD9E2"/>
+  <text class="t h" x="646" y="62">Help message builder</text>
+  <text class="t d" x="646" y="102">Turns a messy description and a location into</text>
+  <text class="t d" x="646" y="132">a short SMS, ready when any signal returns.</text>
+  <rect y="198" width="588" height="174" rx="22" fill="#FFF0C9"/>
+  <text class="t h" x="34" y="260">Source indicator</text>
+  <text class="t d" x="34" y="300">Every answer shows which layer produced it,</text>
+  <text class="t d" x="34" y="330">so the source is never hidden.</text>
+  <rect x="612" y="198" width="588" height="174" rx="22" fill="#D3F0E2"/>
+  <text class="t h" x="646" y="260">Preparedness mode</text>
+  <text class="t d" x="646" y="300">An earthquake bag checklist and a family plan</text>
+  <text class="t d" x="646" y="330">for the days before a disaster.</text>
+</svg>
