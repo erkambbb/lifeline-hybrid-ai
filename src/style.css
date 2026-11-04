@@ -1,0 +1,138 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f6f6f4;
+  --surface: #ffffff;
+  --text: #1b1d21;
+  --muted: #5c6068;
+  --border: #d9dadd;
+  --accent: #b4470c;
+  --accent-text: #ffffff;
+  --error: #a4161a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161a;
+    --surface: #1e2127;
+    --text: #eceded;
+    --muted: #a2a6ae;
+    --border: #363a42;
+    --accent: #f08a3c;
+    --accent-text: #14161a;
+    --error: #ff8a8a;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* NEDEN: Aşağıdaki display kuralları hidden özniteliğini ezer. */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 system-ui, sans-serif;
+}
+
+main {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+h1 {
+  margin: 8px 0 4px;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
+section {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.note {
+  margin: 0;
+  color: var(--muted);
+}
+
+dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 16px;
+  margin: 0;
+}
+
+dt {
+  color: var(--muted);
+}
+
+dd {
+  margin: 0;
+}
+
+label {
+  display: block;
+  margin: 8px 0 4px;
+  color: var(--muted);
+}
+
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font: inherit;
+}
+
+button {
+  min-height: 44px;
+  margin-top: 12px;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: var(--accent-text);
+  border: 0;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+progress {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+}
+
+output {
+  display: block;
+  margin-top: 16px;
+}
+
+.badge {
+  font-weight: 600;
+}
+
+.error {
+  margin: 16px 0 0;
+  color: var(--error);
+}
