@@ -10,43 +10,48 @@
   </head>
   <body>
     <main>
-      <h1>Lifeline</h1>
-      <p class="note">
+      <header>
+        <h1>Lifeline</h1>
+        <button id="language" class="secondary" type="button">English</button>
+      </header>
+      <p class="note" data-i18n="note">
         Altyapı test sayfası. Hibrit yapay zekâ yığınını sınar, acil durum bilgisi
         vermez. Acil durumda 112'yi arayın.
       </p>
 
       <section aria-labelledby="status-title">
-        <h2 id="status-title">Durum</h2>
+        <h2 id="status-title" data-i18n="statusTitle">Durum</h2>
         <dl>
-          <dt>Ağ</dt>
+          <dt data-i18n="network">Ağ</dt>
           <dd id="status-network">…</dd>
-          <dt>Çevrimdışı açılış</dt>
+          <dt data-i18n="offlineShell">Çevrimdışı açılış</dt>
           <dd id="status-sw">…</dd>
           <dt>Firebase</dt>
           <dd id="status-firebase">…</dd>
-          <dt>Cihazdaki model</dt>
+          <dt data-i18n="deviceModel">Cihazdaki model</dt>
           <dd id="status-device">…</dd>
         </dl>
-        <button id="download" type="button" hidden>Cihazdaki modeli indir</button>
+        <button id="download" type="button" data-i18n="downloadModel" hidden>
+          Cihazdaki modeli indir
+        </button>
         <progress id="download-progress" max="1" value="0" hidden></progress>
       </section>
 
       <section aria-labelledby="test-title">
-        <h2 id="test-title">Model testi</h2>
+        <h2 id="test-title" data-i18n="testTitle">Model testi</h2>
         <form id="prompt-form">
-          <label for="mode">Çıkarım modu</label>
+          <label for="mode" data-i18n="inferenceMode">Çıkarım modu</label>
           <select id="mode">
-            <option value="prefer_on_device">Önce cihaz</option>
-            <option value="prefer_in_cloud">Önce bulut</option>
-            <option value="only_on_device">Yalnızca cihaz</option>
-            <option value="only_in_cloud">Yalnızca bulut</option>
+            <option value="prefer_on_device" data-i18n="modePreferDevice">Önce cihaz</option>
+            <option value="prefer_in_cloud" data-i18n="modePreferCloud">Önce bulut</option>
+            <option value="only_on_device" data-i18n="modeOnlyDevice">Yalnızca cihaz</option>
+            <option value="only_in_cloud" data-i18n="modeOnlyCloud">Yalnızca bulut</option>
           </select>
 
-          <label for="prompt">Mesaj</label>
+          <label for="prompt" data-i18n="message">Mesaj</label>
           <textarea id="prompt" rows="3">Bana tek cümleyle merhaba de.</textarea>
 
-          <button id="send" type="submit">Gönder</button>
+          <button id="send" type="submit" data-i18n="send">Gönder</button>
         </form>
 
         <output id="result" hidden>

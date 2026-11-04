@@ -8,6 +8,7 @@ import {
   type DeviceStatus,
   type Mode,
 } from "./hybrid";
+import { getLang, setLang, t, translatePage, type MessageKey } from "./i18n";
 import "./style.css";
 
 /** Sayfadaki bir öğeyi kimliğiyle bulur. Öğe yoksa hemen hata verir. */
@@ -17,6 +18,7 @@ function element<T extends HTMLElement>(id: string): T {
   return found as T;
 }
 
+const languageButton = element<HTMLButtonElement>("language");
 const networkStatus = element("status-network");
 const swStatus = element("status-sw");
 const firebaseStatus = element("status-firebase");
@@ -33,29 +35,66 @@ const resultTime = element("result-time");
 const resultText = element("result-text");
 const errorBox = element("error");
 
-const DEVICE_LABELS: Record<DeviceStatus, string> = {
-  unsupported: "Bu tarayıcıda desteklenmiyor",
-  unavailable: "Bu cihazda kullanılamıyor",
-  downloadable: "Henüz indirilmedi",
-  downloading: "İndiriliyor",
-  available: "Hazır, internetsiz çalışır",
+const DEVICE_LABELS: Record<DeviceStatus, MessageKey> = {
+  unsupported: "deviceUnsupported",
+  unavailable: "deviceUnavailable",
+  downloadable: "deviceDownloadable",
+  downloading: "deviceDownloading",
+  available: "deviceAvailable",
 };
 
-const SOURCE_LABELS: Record<string, string> = {
-  on_device: "📱 Cihazda",
-  in_cloud: "☁️ Bulutta",
+const SOURCE_LABELS: Record<string, MessageKey> = {
+  on_device: "sourceDevice",
+  in_cloud: "sourceCloud",
 };
+
+// Dil değişince ekranın yeniden yazılabilmesi için durumu burada tutuyoruz.
+let swState: MessageKey = import.meta.env.DEV ? "swDev" : "swInstalling";
+let swErrorDetail = "";
+let lastSource: string | null = null;
 
 function showNetwork(): void {
   // navigator.onLine yalnızca "ağ kartı bağlı mı" der, internetin çalıştığını
   // garanti etmez. Bu yüzden karar için değil, sadece bilgi için kullanıyoruz.
-  networkStatus.textContent = navigator.onLine ? "Çevrimiçi" : "Çevrimdışı";
+  networkStatus.textContent = t(navigator.onLine ? "online" : "offline");
+}
+
+function showServiceWorker(): void {
+  swStatus.textContent = swErrorDetail ? `${t(swState)}: ${swErrorDetail}` : t(swState);
+}
+
+function showFirebase(): void {
+  firebaseStatus.textContent = t(isFirebaseConfigured ? "firebaseReady" : "firebaseMissing");
+}
+
+function showSource(): void {
+  if (lastSource === null) return;
+  resultSource.textContent = t(SOURCE_LABELS[lastSource] ?? "sourceUnknown");
 }
 
 async function showDeviceModel(): Promise<void> {
   const status = await getDeviceStatus();
-  deviceStatus.textContent = DEVICE_LABELS[status];
+  deviceStatus.textContent = t(DEVICE_LABELS[status]);
   downloadButton.hidden = status !== "downloadable" && status !== "downloading";
+}
+
+/** Tüm ekranı geçerli dilde yeniden yazar. */
+function render(): void {
+  translatePage();
+  languageButton.textContent = t("switchLanguage");
+  showNetwork();
+  showServiceWorker();
+  showFirebase();
+  showSource();
+  void showDeviceModel();
+}
+
+function onLanguageClick(): void {
+  const previousDefault = t("defaultPrompt");
+  setLang(getLang() === "tr" ? "en" : "tr");
+  // Kullanıcı mesajı değiştirmediyse örnek mesaj da yeni dile geçer.
+  if (promptInput.value === previousDefault) promptInput.value = t("defaultPrompt");
+  render();
 }
 
 function showError(message: string): void {
@@ -72,7 +111,7 @@ async function onDownloadClick(): Promise<void> {
       downloadProgress.value = fraction;
     });
   } catch (error) {
-    showError(`İndirme başarısız: ${String(error)}`);
+    showError(`${t("errorDownload")}: ${String(error)}`);
   } finally {
     downloadButton.disabled = false;
     downloadProgress.hidden = true;
@@ -87,14 +126,15 @@ async function onSubmit(event: SubmitEvent): Promise<void> {
   sendButton.disabled = true;
   try {
     const answer = await ask(createModel(modeSelect.value as Mode), promptInput.value);
-    resultSource.textContent = SOURCE_LABELS[answer.source] ?? "Kaynak bilinmiyor";
+    lastSource = answer.source;
+    showSource();
     resultTime.textContent = `${answer.elapsedMs} ms`;
     // textContent kullanıyoruz, innerHTML değil.
     // NEDEN: Model çıktısı güvenilmez metindir, HTML olarak çalıştırılmamalıdır.
     resultText.textContent = answer.text;
     result.hidden = false;
   } catch (error) {
-    showError(`Cevap alınamadı: ${String(error)}`);
+    showError(`${t("errorAnswer")}: ${String(error)}`);
   } finally {
     sendButton.disabled = false;
   }
@@ -104,15 +144,19 @@ function startOfflineSupport(): void {
   registerSW({
     immediate: true,
     onOfflineReady: () => {
-      swStatus.textContent = "Hazır, uygulama internetsiz açılır";
+      swState = "swReady";
+      showServiceWorker();
     },
     onRegisteredSW: (_url, registration) => {
       if (registration?.active) {
-        swStatus.textContent = "Hazır, uygulama internetsiz açılır";
+        swState = "swReady";
+        showServiceWorker();
       }
     },
     onRegisterError: (error) => {
-      swStatus.textContent = `Başarısız: ${String(error)}`;
+      swState = "swFailed";
+      swErrorDetail = String(error);
+      showServiceWorker();
     },
   });
 
@@ -122,18 +166,12 @@ function startOfflineSupport(): void {
   void navigator.storage?.persist?.();
 }
 
-swStatus.textContent = import.meta.env.DEV
-  ? "Geliştirme modunda kapalı, npm run preview kullan"
-  : "Kuruluyor";
-firebaseStatus.textContent = isFirebaseConfigured
-  ? "Yapılandırıldı"
-  : "Yapılandırılmadı, bulut kapalı (bkz. docs/FIREBASE_SETUP.md)";
-
 window.addEventListener("online", showNetwork);
 window.addEventListener("offline", showNetwork);
+languageButton.addEventListener("click", onLanguageClick);
 downloadButton.addEventListener("click", () => void onDownloadClick());
 form.addEventListener("submit", (event) => void onSubmit(event));
 
-showNetwork();
-void showDeviceModel();
+promptInput.value = t("defaultPrompt");
+render();
 startOfflineSupport();
