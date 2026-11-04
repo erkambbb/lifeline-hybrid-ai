@@ -21,7 +21,7 @@
       <circle cx="1060" cy="285" r="150" fill="#C9EEDD"/>
       <circle cx="760" cy="30" r="110" fill="#FFFFFF"/>
     </g>
-    <path d="M0 262 H330 l38 -78 58 158 46 -112 26 32 H1200" fill="none" stroke="url(#line)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+    <path d="M0 282 H330 l26 -46 40 92 32 -66 18 20 H1200" fill="none" stroke="url(#line)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
     <text x="600" y="150" text-anchor="middle" font-family="Inter, 'Segoe UI', system-ui, -apple-system, Helvetica, Arial, sans-serif" font-size="84" font-weight="700" letter-spacing="-1" fill="#46405C">Lifeline</text>
     <text x="600" y="202" text-anchor="middle" font-family="Inter, 'Segoe UI', system-ui, -apple-system, Helvetica, Arial, sans-serif" font-size="27" fill="#655E7E">Help that keeps working when the network does not</text>
   </g>
