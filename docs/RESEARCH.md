@@ -352,6 +352,8 @@ Hukuki danışmanlık değildir. Telif durumunu yalnızca bulabildiğim kadarıy
 | --- | --- | --- |
 | [IFRC First Aid Guidelines 2020](https://www.ifrc.org/document/international-first-aid-resuscitation-and-education-guidelines) | Kaynak gösterilerek, ticari olmayan kullanım için kopyalanabilir | PDF künyesinde okudum |
 | AFAD | Bulunamadı | afad.gov.tr bu ortamdan HTTP 500 verdi, koşullar doğrulanamadı |
+| [İBB AKOM](https://akom.ibb.istanbul/afet-egitimleri/) | Bulunamadı | Sayfa içeriğini okudum, kendi cümlelerimizle özetledik |
+| [CDC](https://www.cdc.gov/earthquakes/safety/stay-safe-after-an-earthquake.html) | ABD kamu kurumu | Sayfa içeriğini okudum |
 | Türk Kızılay | Açık lisans bulamadım | Tüm hakları saklı varsay |
 | [FEMA](https://www.fema.gov/about/website-information) | Çoğu içerik telifsiz, fotoğraflarda istisna var | Arama sonucundan, sayfa 403 verdi |
 | [WHO](https://www.who.int/about/policies/publishing/copyright) | CC BY-NC-SA 3.0 IGO | Sayfada okudum |
@@ -429,9 +431,19 @@ Yani hata kodda değil, boş bellekte. Görünür pencerede de aynı hata tekrar
 kullanıcıda da bu olabilir ve yedek zinciri bu yüzden şarttır.
 
 **Yapılması gereken son test.** 👤 X-Plane, Steam ve Unity Hub'ı kapat. Sonra kendi
-Chrome'unda demo sayfasını aç, modeli indir, Wi-Fi'yi kapat ve **Yalnızca cihaz**
-modunda **Gönder** de. 📱 Cihazda rozetini görürsek projenin ana varsayımı bu
+Chrome'unda uygulamayı aç. **Hazırlık** sekmesinden modeli ve çeviri paketini indir,
+Wi-Fi'yi kapat. **Teknik test** içinde **Yalnızca cihaz** modunda **Gönder** de. 📱 Cihazda rozetini görürsek projenin ana varsayımı bu
 makinede kanıtlanmış olur.
+
+**Uygulama testi.** Üretim derlemesinde üç ekranı tarayıcıda çalıştırdım. Çevrimdışı
+açılış, Türkçe arama, kart açma, afet çantası, kişi ekleme, konumlu mesaj, `sms:`
+bağlantısı, dil değişimi ve koyu tema çalıştı, tarayıcı hatası çıkmadı. Bu testte
+cihaz modeli ve bulut devrede değildi, yani hepsi 📚 yolundan geçti.
+
+Model ile kart seçimi (`classifySituation`) ve model ile bilgi çıkarımı
+(`extractWithModel`) kodu yazıldı ama **henüz gerçek modelle denenmedi**. Hata
+durumunda yerel aramaya düşer. Özellikle `Schema.object` çıktısının cihazda kabul
+edildiği doğrulanmalı.
 
 **Translator testi.** Tarayıcıyı `--host-resolver-rules` ile tüm alan adları kapalı
 açtım, yani test sırasında internete çıkamıyordu. Paket yüklüyken çeviri yine çalıştı.
