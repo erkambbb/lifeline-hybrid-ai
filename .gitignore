@@ -1,0 +1,27 @@
+# Bağımlılıklar ve derleme çıktıları
+node_modules/
+dist/
+dev-dist/
+
+# Ortam değişkenleri: gerçek değerler asla commit'lenmez.
+# Yalnızca şablon olan .env.example repoda kalır.
+.env
+.env.*
+!.env.example
+
+# Firebase CLI önbelleği ve gizli dosyalar
+.firebase/
+firebase-debug.log*
+firebase-debug.*.log*
+ui-debug.log*
+serviceAccount*.json
+*-adminsdk-*.json
+
+# Log ve işletim sistemi/editör dosyaları
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.local
