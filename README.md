@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img alt="Status: skeleton" src="https://img.shields.io/badge/status-skeleton-FBD9E2?style=flat-square&labelColor=FFF4F0">
+  <img alt="Status: MVP" src="https://img.shields.io/badge/status-MVP-FBD9E2?style=flat-square&labelColor=FFF4F0">
   <img alt="Firebase AI Logic" src="https://img.shields.io/badge/Firebase-AI%20Logic-FFE3D1?style=flat-square&labelColor=FFF8F2">
   <img alt="PWA: offline first" src="https://img.shields.io/badge/PWA-offline%20first-D3F0E2?style=flat-square&labelColor=F3FBF7">
   <img alt="Languages: Turkish and English" src="https://img.shields.io/badge/languages-Turkish%20%2B%20English-E6DCF8?style=flat-square&labelColor=F7F3FD">
@@ -19,14 +19,14 @@
 In the first hours after a major earthquake, mobile networks often fail. That is
 when people most need calm, trustworthy guidance, and when cloud AI stops
 working. Lifeline is a Progressive Web App that keeps answering when the network
-does not. It opens in Turkish for people in Türkiye, and `?lang=en` switches it to
-English. Read the full idea in [docs/IDEA.md](docs/IDEA.md).
+does not. In Turkish the app is called **Can Hattı**. It opens in Turkish for people
+in Türkiye, and `?lang=en` switches it to English. Read the full idea in
+[docs/IDEA.md](docs/IDEA.md).
 
-> [!NOTE]
-> This repository is an infrastructure skeleton. It holds research, setup, and one
-> hybrid test page. Core features start on 9 November 2026, as planned in
-> [docs/ROADMAP.md](docs/ROADMAP.md). The app gives no emergency guidance yet. In
-> an emergency, call 112.
+> [!WARNING]
+> No health professional has reviewed the emergency cards yet. They summarize the
+> sources listed on each card, and they do not replace professional help. In an
+> emergency, call 112. Current status is in [docs/ROADMAP.md](docs/ROADMAP.md).
 
 <img src="docs/assets/divider.svg" alt="" width="100%">
 
@@ -90,10 +90,10 @@ limits.
 
 <img src="docs/assets/divider.svg" alt="" width="100%">
 
-## Planned features
+## Features
 
 <p align="center">
-  <img src="docs/assets/features.svg" alt="Planned features: emergency guide, help message builder, source indicator, and preparedness mode." width="100%">
+  <img src="docs/assets/features.svg" alt="Features: emergency guide, help message builder, source indicator, and preparedness mode." width="100%">
 </p>
 
 <img src="docs/assets/divider.svg" alt="" width="100%">
@@ -120,6 +120,8 @@ npm run build
 npm run preview
 ```
 
+Run the unit tests with `npm test`.
+
 ### On-device requirements
 
 Chrome on Windows, macOS, Linux, or a Chromebook Plus, with at least 22 GB of free
@@ -143,10 +145,14 @@ you see `InvalidStateError: The device is unable to create a session`.
 ## Project structure
 
 ```text
+src/content/       Knowledge cards, sources, and the bag checklist
+src/core/          Search, triage rules, and SMS building, with tests
+src/ui/            Emergency, help message, and prepare screens
+src/hybrid.ts      Hybrid inference: classification and fact extraction
+src/translate.ts   On-device Turkish to English bridge
 src/firebase.ts    Firebase and App Check setup
-src/hybrid.ts      Hybrid model, on-device status, source detection
 src/i18n.ts        Turkish and English text, language selection
-src/main.ts        Test page and service worker registration
+src/main.ts        App shell and service worker registration
 vite.config.ts     PWA manifest and precache rules
 firebase.json      Hosting configuration
 docs/              Idea, research, setup, roadmap, learning plan
@@ -162,6 +168,7 @@ web config can be public and why App Check is still required.
 
 The code is released under the [MIT License](LICENSE).
 
-The MIT License will not cover the emergency content that is added later. That
-content will carry its own attribution and terms, because some of its sources permit
-non-commercial use only.
+The MIT License does not cover the emergency content in `src/content/`. See
+[src/content/LICENSE.md](src/content/LICENSE.md), because some sources permit
+non-commercial use only. The Atkinson Hyperlegible font is under the SIL Open Font
+License.
