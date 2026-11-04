@@ -19,8 +19,11 @@ Her bilginin dayanağını belirttim:
 3. **Doküman, model indikten sonra çevrimdışı çalıştığını söylüyor.** Bunu bu
    makinede uçtan uca kanıtlayamadım: VRAM dolu olduğu için model yüklenemedi.
    Bölüm 8'deki son adım hâlâ yapılmalı. [Doküman]
-4. **Android native yol var ama çözüm değil.** Yalnızca belirli üst seviye
-   telefonlarda çalışıyor. Doğrulanmış diller İngilizce ve Korece. [Doküman]
+4. **Native yollar var ama şu an bize uygun değil.** Android yalnızca belirli üst
+   seviye telefonlarda çalışıyor, doğrulanmış dilleri İngilizce ve Korece. iOS ise
+   Mac ve Xcode ister. [Doküman]
+5. **Türkçe köprüsü çevrimdışı çalışıyor.** Translator API ağ tamamen kapalıyken
+   çeviri yaptı, ama anlam hatası da gördüm (bölüm 8). [Test]
 
 **Öneri:** PWA'da kal, üç katmanlı tasarım kullan (bölüm 2 sonu). Model talimat
 yazmaz, doğrulanmış bilgi kartı seçer. Modelsiz cihazlarda çevrimdışı yerel arama
@@ -165,8 +168,7 @@ buluta gider. Çevrimdışıyken de çöker. [SDK]
 [Translator API'si](https://developer.chrome.com/docs/ai/translator-api) Türkçeyi
 destekliyor ve masaüstünde çalışıyor. Türkçe metin önce İngilizceye çevrilir,
 Nano İngilizce çalışır, kullanıcı önceden yazılmış Türkçe kartı görür.
-Translator'ın çevrimdışı davranışı dokümanda açıkça yazmıyor, Hafta 1'de test
-edilecek.
+Translator paketi indikten sonra ağ tamamen kapalıyken de çalıştı (bölüm 8).
 
 ### Android native (AICore)
 
@@ -182,6 +184,25 @@ Android hibrit API'si vardır.
 - Limit: istek başına 4000 token, çıktı için yaklaşık 256 token önerisi.
 - Yalnızca uygulama ön plandayken çalışır. Kota ve pil sınırı var.
 - Kaynak tespiti web ile aynı: `result.response.inferenceSource`.
+
+### iOS native (Apple Foundation Models)
+
+Firebase'in hibrit dokümanında iOS da var. Burada cihaz modeli Gemini Nano değil,
+Apple'ın Foundation Models çerçevesidir.
+[Doküman](https://firebase.google.com/docs/ai-logic/hybrid/ios/get-started)
+
+- Durum: deneysel. Kurulum yalnızca Swift Package Manager ile.
+- Şart: cihazda Apple Intelligence açık olmalı. Model işletim sistemi tarafından
+  indirilir, uygulama indirmeyi başlatamaz.
+- Limit: 4096 token, yalnızca metin, uygulama ön plandayken.
+- Türkçe: Apple Intelligence'a Türkçe eklendiğini söyleyen bir
+  [geliştirici forumu yazısı](https://developer.apple.com/forums/thread/805378) var,
+  ama Foundation Models için resmi dil listesini doğrulayamadım. [Zayıf]
+
+Bu yol ileride çok değerli olabilir: Türkçe bir cihaz modeli telefonda çalışabilir.
+Ama iOS uygulaması Mac ve Xcode ister, bu proje ise Linux'ta geliştiriliyor. Ayrıca
+Apple Intelligence destekli bir iPhone gerekir. Bu yüzden "sıradaki adım" olarak
+tutuyoruz.
 
 ### Seçenekler
 
@@ -388,6 +409,9 @@ DevTools protokolüyle, üretim derlemesi üzerinde ve geçici bir profille yap�
 | Cihazda cevap üretme | ❌ `InvalidStateError` |
 | Çevrimdışı, model de çalışmıyorken `PREFER_ON_DEVICE` | Beklendiği gibi hata (`Failed to fetch`) |
 | `VITE_APPCHECK_DEBUG_TOKEN` üretim paketine sızıyor mu? | ✅ Sızmıyor (bölüm sonuna bak) |
+| Translator `tr → en` paketi indirme | ✅ İlk çeviriyle birlikte yaklaşık 15 saniye |
+| Translator, ağ gerçekten kapalıyken | ✅ 5 cümle 229 ms |
+| Dil seçimi (varsayılan, geçiş, kalıcılık, çevrimdışı `?lang=en`) | ✅ |
 
 **`InvalidStateError` nedeni.** Chrome günlüğünde şu satır var:
 
@@ -409,20 +433,72 @@ Chrome'unda demo sayfasını aç, modeli indir, Wi-Fi'yi kapat ve **Yalnızca ci
 modunda **Gönder** de. 📱 Cihazda rozetini görürsek projenin ana varsayımı bu
 makinede kanıtlanmış olur.
 
+**Translator testi.** Tarayıcıyı `--host-resolver-rules` ile tüm alan adları kapalı
+açtım, yani test sırasında internete çıkamıyordu. Paket yüklüyken çeviri yine çalıştı.
+Çıktılar:
+
+| Türkçe | İngilizce | Değerlendirme |
+| --- | --- | --- |
+| kolum kanıyor | my arm is bleeding | Doğru |
+| enkaz altındayım | I'm under the rubble | Doğru |
+| gaz kokusu var | It has a gas smell | Yeterli |
+| 3 kişiyiz, annem yaralı, 2. kattayız | 3 of us, my mother is injured, we are on the 2nd floor | Doğru |
+| bacağım sıkıştı nefes alamıyorum | My leg is tight, I can't breathe | **Yanlış:** "sıkıştı" burada "trapped" demek |
+
+Son örnek bir uyarıdır: çeviri, enkaz altı durumunu hafif bir şikâyete çevirebilir.
+Bu yüzden Türkçe anahtar kelime araması her zaman orijinal metinde de çalışmalı. Kart
+seçimi doğruluk testine de bu tür cümleler girmeli.
+
 **Sızıntı testi.** İlk sürümde `const env = import.meta.env` kısaltması kullandım.
 Vite bu durumda tüm `VITE_` değerlerini paketin içine gömüyor. Bu yüzden her
 değişkene tam adıyla erişecek şekilde düzelttim. Sahte bir token ile yaptığım
 derlemede token pakette çıkmadı.
 
-## 9. Yarışma sayfasından notlar
+## 9. Yarışma sayfası incelemesi
 
-[Devpost sayfası](https://firebasehybridaihackathon.devpost.com/), 4 Kasım itibarıyla:
+[Devpost sayfasının](https://firebasehybridaihackathon.devpost.com/) tüm sekmelerini
+4 Kasım 2026'da inceledim.
 
-- Tam kurallar 9 Kasım'da yayınlanacak, **Rules** sekmesi henüz boş.
-- Büyük ödül 30.000 dolar, tek kazanan. Kayıtlı 571 katılımcı var.
-- **Dördüncü jüri kriteri var:** "Quality of the Idea". Yaratıcı, bariz olmayan
-  kullanım ve problem alanını gerçekten anlamak isteniyor.
-- Kategoriler arasında Mobile ve Web geçiyor.
+**Resmi takvim**
+([Schedule](https://firebasehybridaihackathon.devpost.com/details/dates)):
+
+| Aşama | Pasifik saati | Türkiye saati |
+| --- | --- | --- |
+| Teslim açılır | 9 Kasım, 08:00 PST | 9 Kasım, 19:00 |
+| Teslim kapanır | 30 Kasım, 14:00 PST | **1 Aralık, 01:00** |
+| Jüri | 9-16 Aralık | 9-17 Aralık |
+| Kazananlar | 21 Aralık, 14:00 PST | 22 Aralık, 01:00 |
+
+**Sayfada yazanlar:**
+
+- Ödül: 30.000 dolar nakit, tek kazanan. Yalnızca tek bir büyük ödül var.
+- Katılım: ülkesinde reşit olanlar. Tüm ülkeler, "standard exceptions" hariç.
+  Türkiye'nin durumu 9 Kasım'daki kurallarda kontrol edilmeli.
+- Takım veya tek kişi olunabilir, karar için erken değil.
+- 577 kayıtlı katılımcı var. Kategoriler: Machine Learning/AI, Mobile, Web.
+- Tam kurallar, teslim şartları, ödüller ve **bonus görevler** 9 Kasım'da gelecek.
+
+**Dört jüri kriteri**, sayfadaki ifadeleriyle:
+
+1. **Technological Implementation:** Proje ne kadar iyi kurulmuş, Firebase AI Logic
+   hibrit çıkarımını çözümün parçası olarak ne kadar etkili kullanıyor?
+2. **Design:** Yalnızca teknik bir kanıt değil, tam ve tutarlı bir ürün deneyimi mi?
+3. **Potential Impact:** Gerçek bir kitlenin gerçek sorununu inandırıcı ve somut
+   anlatıyor mu, gösterilen haliyle bunu çözüyor mu?
+4. **Quality of the Idea:** Firebase AI Logic'in yaratıcı, bariz olmayan bir kullanımı
+   mı, ekip problem alanını gerçekten anlıyor mu?
+
+"Based on what's demonstrated" ifadesi önemli: jüri söyleneni değil gösterileni puanlar.
+
+**Boş sekmeler:** Rules, Updates, Project gallery ve Discussions henüz boş.
+Participants için giriş gerekiyor. Sayfada bir
+[Discord bağlantısı](https://discord.com/invite/HP4BhW3hnp) var, ama bu bağlantıyı
+açmadım. Açıklamadaki "This is a test." satırı yer tutucu gibi duruyor.
+
+**Rakip örneği.** [HybridCopilot](https://github.com/er-s-an/hybridcopilot) de Vite ve
+TypeScript ile web yolunu seçmiş ve ağ kalitesine göre yönlendirme yapıyor. Yani
+yalnızca rozet göstermek bizi öne çıkarmaz. Farkımız, afet senaryosu, enum ile
+uydurmayı önleme, Türkçe köprüsü ve modelsiz üçüncü katman olmalı.
 
 ## 10. Riskler
 
@@ -430,7 +506,7 @@ derlemede token pakette çıkmadı.
 | --- | --- | --- |
 | Jüri telefonda on-device AI bekler | Yüksek | Dürüst konumlandırma, üç katman, demoda laptop ve telefon |
 | Nano Türkçe bilmiyor | Yüksek | Translator köprüsü, enum seçimi, Türkçe kartlar |
-| Translator çevrimdışı çalışmayabilir | Orta | Hafta 1'in ilk testi. Olmazsa Türkçe yerel aramaya düşer |
+| Translator anlamı bozar ("sıkıştı" → "tight") | Yüksek | Yerel arama Türkçe metinde de çalışır, iki sonuç birlikte değerlendirilir |
 | Küçük model yanlış kart seçer | Yüksek | Doğruluk ölçümü, "emin değilim" kartı, kullanıcı tüm kartları görebilir |
 | Tıbbi içerik hatası | Yüksek | Sağlıkçı incelemesi, 112 uyarısı |
 | API'ler deneysel ve değişebilir | Orta | Sürümler sabitlendi, tek dosyada (`src/hybrid.ts`) |
