@@ -67,7 +67,8 @@ App Check zorunlu olduğu için bu adım olmadan yerel bulut istekleri reddedili
 3. 👤 `AppCheck debug token: ...` satırındaki değeri kopyala.
 4. 👤 Konsolda **Security > App Check > Apps** yolunu aç.
 5. 👤 Uygulamanın üç nokta menüsünden **Manage debug tokens** seç ve token'ı ekle.
-6. 👤 Sayfayı yenile. `ONLY_IN_CLOUD` modunda **Send** de. ☁️ Cloud cevabı gelmeli.
+6. 👤 Sayfayı yenile. **Yalnızca bulut** modunda **Gönder** de. ☁️ Bulutta cevabı
+   gelmeli.
 
 ⚠️ Debug token bir sırdır. Asla commit'leme ve ekran görüntüsünde paylaşma.
 Sızarsa aynı menüden hemen sil.

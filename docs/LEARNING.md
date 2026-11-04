@@ -60,7 +60,7 @@ kullanıyoruz.
   ayarıdır. Kurulum adımları `docs/FIREBASE_SETUP.md` içinde.
 - **Kaynak:** [Firebase'i web projesine ekleme](https://firebase.google.com/docs/web/setup)
 - **Alıştırma:** `docs/FIREBASE_SETUP.md` içindeki 1-4. adımları bitir. Sayfadaki
-  **Firebase** satırı "Configured" olmalı.
+  **Firebase** satırı "Yapılandırıldı" olmalı.
 
 ## 4. Firebase AI Logic
 
@@ -71,7 +71,7 @@ Hibrit çıkarım da bu SDK'nın bir özelliğidir.
 - **Projede:** `src/hybrid.ts` içindeki `getAI` ve `getGenerativeModel`.
 - **Kaynak:** [Firebase AI Logic dokümanı](https://firebase.google.com/docs/ai-logic)
 - **Alıştırma:** `src/hybrid.ts` içinde `CLOUD_MODEL` değerini
-  `gemini-3.5-flash-lite` yap. `ONLY_IN_CLOUD` modunda aynı prompt'u gönder.
+  `gemini-3.5-flash-lite` yap. **Yalnızca bulut** modunda aynı mesajı gönder.
   Cevap süresini ve üslubu önceki modelle karşılaştır, sonra değeri geri al.
 
 ## 5. On-device ve cloud AI
@@ -85,9 +85,9 @@ güçlü donanım ister.
   Gerçek sınırlar `docs/RESEARCH.md`, bölüm 2'de.
 - **Kaynak:** [Chrome built-in AI](https://developer.chrome.com/docs/ai/built-in)
 - **Alıştırma:** Önce X-Plane ve Steam gibi ekran kartı kullanan uygulamaları kapat.
-  Sayfadaki **Download on-device model** düğmesiyle modeli indir.
+  Sayfadaki **Cihazdaki modeli indir** düğmesiyle modeli indir.
   `chrome://on-device-internals` adresini aç ve modelin durumunu incele. Sonra
-  sayfayı telefonunda aç. **On-device model** satırı ne diyor, neden?
+  sayfayı telefonunda aç. **Cihazdaki model** satırı ne diyor, neden?
 
 ## 6. Hibrit çıkarım
 
@@ -103,10 +103,10 @@ karar vermesidir. Sen yalnızca bir mod seçersin. Cevap gelince
 
   | Mod | Çevrimiçi | Çevrimdışı |
   | --- | --- | --- |
-  | `PREFER_ON_DEVICE` | | |
-  | `PREFER_IN_CLOUD` | | |
-  | `ONLY_ON_DEVICE` | | |
-  | `ONLY_IN_CLOUD` | | |
+  | Önce cihaz (`PREFER_ON_DEVICE`) | | |
+  | Önce bulut (`PREFER_IN_CLOUD`) | | |
+  | Yalnızca cihaz (`ONLY_ON_DEVICE`) | | |
+  | Yalnızca bulut (`ONLY_IN_CLOUD`) | | |
 
   Afet uygulaması için neden `PREFER_ON_DEVICE` seçtik? İpucu: `docs/RESEARCH.md`,
   bölüm 1.
@@ -121,7 +121,8 @@ sağlık talimatını model uyduramaz.
 - **Projede:** Hafta 1'de yazılacak. Mimari `docs/RESEARCH.md`, "Önerilen mimari"
   bölümünde. Dil sınırı `src/hybrid.ts` içindeki `ON_DEVICE_LANGUAGE`.
 - **Kaynak:** [Gemini prompt stratejileri](https://ai.google.dev/gemini-api/docs/prompting-strategies)
-- **Alıştırma:** `ONLY_ON_DEVICE` modunda iki prompt'u karşılaştır:
+- **Alıştırma:** **Yalnızca cihaz** modunda iki prompt'u karşılaştır. Nano şimdilik
+  yalnızca İngilizce desteklediği için prompt'lar İngilizce:
 
   1. `How do I treat a burn?`
   2. `You may only answer with one of these words: bleeding, rubble, gas, other. Situation: my arm is bleeding.`
@@ -138,7 +139,7 @@ Kanıtı olmayan istekleri Firebase reddeder.
 - **Projede:** `src/firebase.ts` içindeki `setUpAppCheck`. Neden gerektiği
   `docs/FIREBASE_SETUP.md` sonunda.
 - **Kaynak:** [Firebase App Check](https://firebase.google.com/docs/app-check)
-- **Alıştırma:** Debug token'ı kaydettikten sonra `ONLY_IN_CLOUD` modunda istek
+- **Alıştırma:** Debug token'ı kaydettikten sonra **Yalnızca bulut** modunda istek
   gönder. Sonra konsoldan token'ı geçici olarak sil ve tekrar dene. Hata mesajını
   oku. Token'ı geri ekle. Konsolun **Security > App Check** bölümündeki doğrulanmış
   ve doğrulanmamış istek sayılarına bak.

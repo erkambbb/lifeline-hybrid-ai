@@ -405,8 +405,8 @@ Yani hata kodda değil, boş bellekte. Görünür pencerede de aynı hata tekrar
 kullanıcıda da bu olabilir ve yedek zinciri bu yüzden şarttır.
 
 **Yapılması gereken son test.** 👤 X-Plane, Steam ve Unity Hub'ı kapat. Sonra kendi
-Chrome'unda demo sayfasını aç, modeli indir, Wi-Fi'yi kapat ve `ONLY_ON_DEVICE`
-modunda **Send** de. 📱 On-device rozetini görürsek projenin ana varsayımı bu
+Chrome'unda demo sayfasını aç, modeli indir, Wi-Fi'yi kapat ve **Yalnızca cihaz**
+modunda **Gönder** de. 📱 Cihazda rozetini görürsek projenin ana varsayımı bu
 makinede kanıtlanmış olur.
 
 **Sızıntı testi.** İlk sürümde `const env = import.meta.env` kısaltması kullandım.
