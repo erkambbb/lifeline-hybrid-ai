@@ -12,7 +12,8 @@ npm install
 npm run dev
 ```
 
-Tarayıcıda `http://localhost:5173` adresini aç.
+Tarayıcıda `http://localhost:5173` adresini aç. Sağ üstteki düğme dili değiştirir.
+Metinler `src/i18n.ts` içinde.
 
 ## 1. Git ve GitHub
 

@@ -1,17 +1,27 @@
 # Yol haritası: 9-30 Kasım 2026
 
-Teslim: **30 Kasım 2026 Pazartesi, 14:00 PT**. Türkiye saatiyle bu, 1 Aralık
-Salı 01:00 demektir. Hedefimiz 29 Kasım akşamı teslim etmek.
+| Olay | Türkiye saati |
+| --- | --- |
+| Teslim açılır, kurallar yayınlanır | 9 Kasım Pazartesi, 19:00 |
+| **Teslim kapanır** | **1 Aralık Salı, 01:00** |
+| Jüri | 9-17 Aralık |
+| Kazananlar | 22 Aralık, 01:00 |
+
+Hedefimiz 29 Kasım akşamı teslim etmek. Yarışmaya her şey İngilizce gönderilir.
 
 ## 9 Kasım'dan önce (şu an)
 
 Yalnızca altyapı, araştırma ve iskelet. Ana özellik yok.
 
 - [x] Fikir, araştırma, repo, iskelet, ders planı
+- [x] Türkçe ve İngilizce dil altyapısı
+- [x] Otomatik derleme (GitHub Actions)
+- [x] Translator API çevrimdışı testi
+- [x] Devpost taslağı (`docs/SUBMISSION.md`) ve izin e-postaları (`docs/OUTREACH.md`)
 - [ ] Firebase kurulumu (`docs/FIREBASE_SETUP.md`)
 - [ ] Devpost'ta **Join hackathon**
 - [ ] `docs/LEARNING.md` derslerine başla
-- [ ] Kurumlara izin e-postası at (`docs/RESEARCH.md`, bölüm 6)
+- [ ] Kurumlara izin e-postası at (`docs/OUTREACH.md`)
 - [ ] Son test: ağır uygulamaları kapat, çevrimdışı 📱 Cihazda cevabını gör
       (`docs/RESEARCH.md`, bölüm 8)
 
@@ -19,6 +29,7 @@ Yalnızca altyapı, araştırma ve iskelet. Ana özellik yok.
 
 Kurallar bu gün yayınlanıyor. Kod yazmadan önce oku.
 
+- [ ] Türkiye katılabilen ülkeler arasında mı? Katılım ücreti var mı?
 - [ ] Var olan projeler ve "önemli yeni geliştirme" şartı ne diyor?
 - [ ] Yapay zekâ destekli geliştirmeye dair kural var mı?
 - [ ] Zorunlu teslim öğeleri neler (video süresi, canlı URL, repo)?
@@ -34,7 +45,8 @@ Amaç: üç katman uçtan uca çalışsın, içerik henüz az olsun.
 - [ ] Bilgi tabanı şeması ve 3 örnek kart (kanama, enkaz altı, gaz kokusu)
 - [ ] Katman 3: modelsiz çevrimdışı arama (Türkçe anahtar kelime)
 - [ ] Katman 1-2: hibrit kart seçimi (enum çıktı)
-- [ ] Translator API ile `tr → en` köprüsü ve çevrimdışı testi
+- [ ] Translator API ile `tr → en` köprüsü
+- [ ] Yerel aramayı Türkçe orijinal metinde de çalıştır (çeviri hatasına karşı)
 - [ ] Yedek zinciri: cihaz hata verirse bulut, o da olmazsa yerel arama
 - [ ] Hibrit gösterge: 📱 Cihazda, ☁️ Bulutta, 📚 Çevrimdışı kütüphane
 - [ ] Yardım mesajı oluşturucu: yapılandırılmış çıkarım, konum, `sms:` bağlantısı
@@ -44,7 +56,7 @@ Amaç: üç katman uçtan uca çalışsın, içerik henüz az olsun.
 
 Amaç: içerik güvenilir olsun, ürün bütünlüklü görünsün.
 
-- [ ] 15-20 Türkçe bilgi kartı, her biri kaynaklı
+- [ ] 15-20 bilgi kartı, Türkçe ve İngilizce, her biri kaynaklı
 - [ ] Kartların sağlık bilgisi olan biri tarafından gözden geçirilmesi
 - [ ] Hazırlık modu: deprem çantası listesi ve aile planı
 - [ ] Panik dostu tasarım: büyük düğmeler, kısa metin, yüksek kontrast
@@ -56,10 +68,12 @@ Amaç: gerçek cihazlarda doğrula ve teslim et.
 
 - [ ] Gerçek Android ve iPhone: kurulum, çevrimdışı açılış, `sms:`, GPS
 - [ ] Uçak modu ve zayıf ağ testleri
-- [ ] 10 örnek senaryoyla kart seçimi doğruluğu ölçümü
+- [ ] 10 örnek senaryoyla kart seçimi doğruluğu ölçümü ("bacağım sıkıştı" gibi
+      çeviri tuzakları dahil)
 - [ ] Firebase Hosting'e yayın ve App Check metriklerinin kontrolü
 - [ ] Demo videosu çekimi (aşağıda)
-- [ ] Devpost sayfası ve ekran görüntüleri
+- [ ] Devpost sayfası ve ekran görüntüleri (`docs/SUBMISSION.md`)
+- [ ] Jüri bağlantısı `?lang=en` ile temiz tarayıcıda deneme
 - [ ] 29 Kasım akşamı teslim, 30 Kasım'ı yedek bırak
 
 ## Demo videosu (3 dakikanın altında, hedef 2:45)
@@ -82,6 +96,5 @@ Videonun merkezi "interneti kes, uygulama çalışmaya devam ediyor" anıdır.
 - Kesintisiz tek çekim yap ki kurgu şüphesi olmasın.
 - Çekimden önce X-Plane, Steam ve Unity Hub gibi ağır uygulamaları kapat. Boş
   VRAM yoksa model yüklenemez.
-- Uygulama tamamen Türkçe olduğu için videoya İngilizce altyazı ekle. Jüri
-  ekrandaki metni ancak böyle anlar.
+- Videoyu `?lang=en` ile çek ve İngilizce anlat. Metin: `docs/SUBMISSION.md`.
 - Laptop ve telefonun neyi nasıl yaptığını dürüstçe söyle. Bu, jüri için artıdır.

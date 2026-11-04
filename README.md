@@ -6,7 +6,7 @@
   <img alt="Status: skeleton" src="https://img.shields.io/badge/status-skeleton-FBD9E2?style=flat-square&labelColor=FFF4F0">
   <img alt="Firebase AI Logic" src="https://img.shields.io/badge/Firebase-AI%20Logic-FFE3D1?style=flat-square&labelColor=FFF8F2">
   <img alt="PWA: offline first" src="https://img.shields.io/badge/PWA-offline%20first-D3F0E2?style=flat-square&labelColor=F3FBF7">
-  <img alt="Language: Turkish" src="https://img.shields.io/badge/app%20language-Turkish-E6DCF8?style=flat-square&labelColor=F7F3FD">
+  <img alt="Languages: Turkish and English" src="https://img.shields.io/badge/languages-Turkish%20%2B%20English-E6DCF8?style=flat-square&labelColor=F7F3FD">
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-D5EDF7?style=flat-square&labelColor=F2FAFD">
 </p>
 
@@ -19,8 +19,8 @@
 In the first hours after a major earthquake, mobile networks often fail. That is
 when people most need calm, trustworthy guidance, and when cloud AI stops
 working. Lifeline is a Progressive Web App that keeps answering when the network
-does not. The app is entirely in Turkish, for people in Türkiye. Read the full
-idea in [docs/IDEA.md](docs/IDEA.md).
+does not. It opens in Turkish for people in Türkiye, and `?lang=en` switches it to
+English. Read the full idea in [docs/IDEA.md](docs/IDEA.md).
 
 > [!NOTE]
 > This repository is an infrastructure skeleton. It holds research, setup, and one
@@ -145,6 +145,7 @@ you see `InvalidStateError: The device is unable to create a session`.
 ```text
 src/firebase.ts    Firebase and App Check setup
 src/hybrid.ts      Hybrid model, on-device status, source detection
+src/i18n.ts        Turkish and English text, language selection
 src/main.ts        Test page and service worker registration
 vite.config.ts     PWA manifest and precache rules
 firebase.json      Hosting configuration

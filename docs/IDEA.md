@@ -31,9 +31,9 @@ cloud chatbot cannot answer without a connection.
 Lifeline is a Progressive Web App that people install before a disaster. Every
 request goes to the best layer that the device can offer:
 
-- **📱 Cihazda (on-device):** Gemini Nano answers with no network, on capable devices.
-- **☁️ Bulutta (cloud):** Gemini Flash answers on any device that has a connection.
-- **📚 Çevrimdışı kütüphane (offline library):** with no model and no network, a local search over the
+- **📱 On-device (Cihazda):** Gemini Nano answers with no network, on capable devices.
+- **☁️ Cloud (Bulutta):** Gemini Flash answers on any device that has a connection.
+- **📚 Offline library (Çevrimdışı kütüphane):** with no model and no network, a local search over the
   built-in knowledge base still finds the right guidance.
 
 Firebase AI Logic hybrid inference manages the move between the on-device and
@@ -69,8 +69,8 @@ the message in seconds, so that the person is ready when any signal returns.
 
 ### 3. Hybrid status indicator
 
-Every answer shows where it came from: 📱 Cihazda (on-device), ☁️ Bulutta
-(cloud), or 📚 Çevrimdışı kütüphane (offline library). The user can see that the app is still working, and the source of each
+Every answer shows where it came from: 📱 On-device, ☁️ Cloud, or 📚 Offline
+library. The user can see that the app is still working, and the source of each
 answer is never hidden.
 
 ### 4. Preparedness mode
@@ -81,9 +81,10 @@ before they need it.
 
 ## Language
 
-The app is entirely in Turkish, because it serves people in Türkiye during a
-crisis. Project documents stay in English, and the demo video carries English
-subtitles for the judges.
+The app supports Turkish and English. Turkish is the default, because the released
+app serves people in Türkiye during a crisis. An English mode serves everyone else.
+The hackathon submission is fully in English: the judges get a `?lang=en` link, and
+the demo video runs in English.
 
 The on-device model does not accept Turkish yet. On desktop, Chrome's on-device
 Translator API bridges Turkish input to English. The user still reads
@@ -132,5 +133,6 @@ Model talimat yazmaz, insanların hazırladığı bilgi kartlarından birini se�
 
 MVP dört özellikten oluşur: güvenilir kaynaklara dayalı acil durum rehberi,
 konumlu yardım SMS'i oluşturucu, her cevabın kaynağını gösteren hibrit gösterge
-ve afet öncesi hazırlık modu. Uygulama tamamen Türkçedir. Hedef kitle, başta
+ve afet öncesi hazırlık modu. Uygulama varsayılan olarak Türkçedir ve İngilizce seçeneği vardır. Yarışmaya
+İngilizce gönderilir. Hedef kitle, başta
 Türkiye olmak üzere deprem riski yüksek bölgelerde yaşayanlardır.
