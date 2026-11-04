@@ -1,7 +1,7 @@
-# Lifeline: an offline-first hybrid AI disaster assistant
+# Lifeline (Can Hattı): an offline-first hybrid AI disaster assistant
 
-Project idea for the Firebase #BuildHybridAI 2026 hackathon.
-"Lifeline" is a working name.
+Project idea for the Firebase #BuildHybridAI 2026 hackathon. The app is called
+Lifeline in English and Can Hattı in Turkish.
 
 ## Problem
 

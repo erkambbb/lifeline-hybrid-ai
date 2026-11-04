@@ -14,6 +14,7 @@ npm run dev
 
 Tarayıcıda `http://localhost:5173` adresini aç. Sağ üstteki düğme dili değiştirir.
 Metinler `src/i18n.ts` içinde.
+Model denemeleri **Hazırlık > Teknik test** bölümünde.
 
 ## 1. Git ve GitHub
 
@@ -60,8 +61,8 @@ kullanıyoruz.
 - **Projede:** `src/firebase.ts` bağlantıyı kurar. `firebase.json` barındırma
   ayarıdır. Kurulum adımları `docs/FIREBASE_SETUP.md` içinde.
 - **Kaynak:** [Firebase'i web projesine ekleme](https://firebase.google.com/docs/web/setup)
-- **Alıştırma:** `docs/FIREBASE_SETUP.md` içindeki 1-4. adımları bitir. Sayfadaki
-  **Firebase** satırı "Yapılandırıldı" olmalı.
+- **Alıştırma:** `docs/FIREBASE_SETUP.md` içindeki 1-4. adımları bitir. **Teknik test**
+  içindeki **Firebase** satırı "Yapılandırıldı" olmalı.
 
 ## 4. Firebase AI Logic
 
@@ -86,9 +87,9 @@ güçlü donanım ister.
   Gerçek sınırlar `docs/RESEARCH.md`, bölüm 2'de.
 - **Kaynak:** [Chrome built-in AI](https://developer.chrome.com/docs/ai/built-in)
 - **Alıştırma:** Önce X-Plane ve Steam gibi ekran kartı kullanan uygulamaları kapat.
-  Sayfadaki **Cihazdaki modeli indir** düğmesiyle modeli indir.
+  **Hazırlık** sekmesinde **Cihazdaki yapay zekâ** satırından modeli indir.
   `chrome://on-device-internals` adresini aç ve modelin durumunu incele. Sonra
-  sayfayı telefonunda aç. **Cihazdaki model** satırı ne diyor, neden?
+  sayfayı telefonunda aç. **Cihazdaki yapay zekâ** satırı ne diyor, neden?
 
 ## 6. Hibrit çıkarım
 
@@ -96,10 +97,10 @@ Hibrit çıkarım, her istek için modelin cihazda mı bulutta mı çalışacağ
 karar vermesidir. Sen yalnızca bir mod seçersin. Cevap gelince
 `response.inferenceSource` değeri kaynağı söyler.
 
-- **Projede:** `src/hybrid.ts` içindeki `createModel` ve `ask`. Rozetler
-  `src/main.ts` içindeki `SOURCE_LABELS` nesnesinde.
+- **Projede:** `src/hybrid.ts` içindeki `createModel` ve `ask`. Yedek zinciri
+  `askHybrid` fonksiyonunda. Rozetler `src/ui/emergency.ts` içinde.
 - **Kaynak:** [Web'de hibrit deneyim](https://firebase.google.com/docs/ai-logic/hybrid/web/get-started)
-- **Alıştırma:** Demo sayfasındaki prompt'u değiştir. Dört modu önce çevrimiçi
+- **Alıştırma:** **Teknik test** içindeki mesajı değiştir. Dört modu önce çevrimiçi
   dene, sonra Wi-Fi'yi kapatıp tekrar dene. Her biri için sonucu şu tabloya yaz:
 
   | Mod | Çevrimiçi | Çevrimdışı |
@@ -119,8 +120,8 @@ kaynaklara bağlamaktır. Biz bir adım ileri gidiyoruz: model talimat yazmıyor
 yalnızca insanların hazırladığı bilgi kartlarından birini seçiyor. Böylece
 sağlık talimatını model uyduramaz.
 
-- **Projede:** Hafta 1'de yazılacak. Mimari `docs/RESEARCH.md`, "Önerilen mimari"
-  bölümünde. Dil sınırı `src/hybrid.ts` içindeki `ON_DEVICE_LANGUAGE`.
+- **Projede:** Kartlar `src/content/cards.ts`, model seçimi `src/hybrid.ts` içindeki
+  `classifySituation`, güvenlik kuralı `src/core/triage.ts` içindeki `mergeResult`.
 - **Kaynak:** [Gemini prompt stratejileri](https://ai.google.dev/gemini-api/docs/prompting-strategies)
 - **Alıştırma:** **Yalnızca cihaz** modunda iki prompt'u karşılaştır. Nano şimdilik
   yalnızca İngilizce desteklediği için prompt'lar İngilizce:
