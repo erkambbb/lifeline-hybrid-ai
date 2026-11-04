@@ -474,7 +474,7 @@ derlemede token pakette çıkmadı.
 - Ödül: 30.000 dolar nakit, tek kazanan. Yalnızca tek bir büyük ödül var.
 - Katılım: ülkesinde reşit olanlar. Tüm ülkeler, "standard exceptions" hariç.
   Türkiye'nin durumu 9 Kasım'daki kurallarda kontrol edilmeli.
-- Takım veya tek kişi olunabilir, karar için erken değil.
+- Takım veya tek kişi katılınabilir, bunu henüz seçmek gerekmiyor.
 - 577 kayıtlı katılımcı var. Kategoriler: Machine Learning/AI, Mobile, Web.
 - Tam kurallar, teslim şartları, ödüller ve **bonus görevler** 9 Kasım'da gelecek.
 
