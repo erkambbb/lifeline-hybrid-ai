@@ -13,7 +13,7 @@ import "./style.css";
 /** Sayfadaki bir öğeyi kimliğiyle bulur. Öğe yoksa hemen hata verir. */
 function element<T extends HTMLElement>(id: string): T {
   const found = document.getElementById(id);
-  if (!found) throw new Error(`Missing element: #${id}`);
+  if (!found) throw new Error(`Öğe bulunamadı: #${id}`);
   return found as T;
 }
 
@@ -34,22 +34,22 @@ const resultText = element("result-text");
 const errorBox = element("error");
 
 const DEVICE_LABELS: Record<DeviceStatus, string> = {
-  unsupported: "Not supported in this browser",
-  unavailable: "Unavailable on this device",
-  downloadable: "Not downloaded yet",
-  downloading: "Downloading",
-  available: "Ready, works without internet",
+  unsupported: "Bu tarayıcıda desteklenmiyor",
+  unavailable: "Bu cihazda kullanılamıyor",
+  downloadable: "Henüz indirilmedi",
+  downloading: "İndiriliyor",
+  available: "Hazır, internetsiz çalışır",
 };
 
 const SOURCE_LABELS: Record<string, string> = {
-  on_device: "📱 On-device",
-  in_cloud: "☁️ Cloud",
+  on_device: "📱 Cihazda",
+  in_cloud: "☁️ Bulutta",
 };
 
 function showNetwork(): void {
   // navigator.onLine yalnızca "ağ kartı bağlı mı" der, internetin çalıştığını
   // garanti etmez. Bu yüzden karar için değil, sadece bilgi için kullanıyoruz.
-  networkStatus.textContent = navigator.onLine ? "Online" : "Offline";
+  networkStatus.textContent = navigator.onLine ? "Çevrimiçi" : "Çevrimdışı";
 }
 
 async function showDeviceModel(): Promise<void> {
@@ -72,7 +72,7 @@ async function onDownloadClick(): Promise<void> {
       downloadProgress.value = fraction;
     });
   } catch (error) {
-    showError(`Download failed: ${String(error)}`);
+    showError(`İndirme başarısız: ${String(error)}`);
   } finally {
     downloadButton.disabled = false;
     downloadProgress.hidden = true;
@@ -87,14 +87,14 @@ async function onSubmit(event: SubmitEvent): Promise<void> {
   sendButton.disabled = true;
   try {
     const answer = await ask(createModel(modeSelect.value as Mode), promptInput.value);
-    resultSource.textContent = SOURCE_LABELS[answer.source] ?? answer.source;
+    resultSource.textContent = SOURCE_LABELS[answer.source] ?? "Kaynak bilinmiyor";
     resultTime.textContent = `${answer.elapsedMs} ms`;
     // textContent kullanıyoruz, innerHTML değil.
     // NEDEN: Model çıktısı güvenilmez metindir, HTML olarak çalıştırılmamalıdır.
     resultText.textContent = answer.text;
     result.hidden = false;
   } catch (error) {
-    showError(`No answer: ${String(error)}`);
+    showError(`Cevap alınamadı: ${String(error)}`);
   } finally {
     sendButton.disabled = false;
   }
@@ -104,15 +104,15 @@ function startOfflineSupport(): void {
   registerSW({
     immediate: true,
     onOfflineReady: () => {
-      swStatus.textContent = "Ready, app opens without internet";
+      swStatus.textContent = "Hazır, uygulama internetsiz açılır";
     },
     onRegisteredSW: (_url, registration) => {
       if (registration?.active) {
-        swStatus.textContent = "Ready, app opens without internet";
+        swStatus.textContent = "Hazır, uygulama internetsiz açılır";
       }
     },
     onRegisterError: (error) => {
-      swStatus.textContent = `Failed: ${String(error)}`;
+      swStatus.textContent = `Başarısız: ${String(error)}`;
     },
   });
 
@@ -122,10 +122,12 @@ function startOfflineSupport(): void {
   void navigator.storage?.persist?.();
 }
 
-swStatus.textContent = import.meta.env.DEV ? "Off in dev mode, use npm run preview" : "Installing";
+swStatus.textContent = import.meta.env.DEV
+  ? "Geliştirme modunda kapalı, npm run preview kullan"
+  : "Kuruluyor";
 firebaseStatus.textContent = isFirebaseConfigured
-  ? "Configured"
-  : "Not configured, cloud is off (see docs/FIREBASE_SETUP.md)";
+  ? "Yapılandırıldı"
+  : "Yapılandırılmadı, bulut kapalı (bkz. docs/FIREBASE_SETUP.md)";
 
 window.addEventListener("online", showNetwork);
 window.addEventListener("offline", showNetwork);

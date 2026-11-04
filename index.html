@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="tr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#14161a" />
-    <title>Lifeline: infrastructure test</title>
+    <title>Lifeline: altyapı testi</title>
     <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/icons/icon-192.png" />
   </head>
@@ -12,41 +12,41 @@
     <main>
       <h1>Lifeline</h1>
       <p class="note">
-        Infrastructure test page. It checks the hybrid AI stack and gives no
-        emergency guidance. In an emergency, call 112.
+        Altyapı test sayfası. Hibrit yapay zekâ yığınını sınar, acil durum bilgisi
+        vermez. Acil durumda 112'yi arayın.
       </p>
 
       <section aria-labelledby="status-title">
-        <h2 id="status-title">Status</h2>
+        <h2 id="status-title">Durum</h2>
         <dl>
-          <dt>Network</dt>
+          <dt>Ağ</dt>
           <dd id="status-network">…</dd>
-          <dt>Offline app shell</dt>
+          <dt>Çevrimdışı açılış</dt>
           <dd id="status-sw">…</dd>
           <dt>Firebase</dt>
           <dd id="status-firebase">…</dd>
-          <dt>On-device model</dt>
+          <dt>Cihazdaki model</dt>
           <dd id="status-device">…</dd>
         </dl>
-        <button id="download" type="button" hidden>Download on-device model</button>
+        <button id="download" type="button" hidden>Cihazdaki modeli indir</button>
         <progress id="download-progress" max="1" value="0" hidden></progress>
       </section>
 
       <section aria-labelledby="test-title">
-        <h2 id="test-title">Prompt test</h2>
+        <h2 id="test-title">Model testi</h2>
         <form id="prompt-form">
-          <label for="mode">Inference mode</label>
+          <label for="mode">Çıkarım modu</label>
           <select id="mode">
-            <option value="prefer_on_device">PREFER_ON_DEVICE</option>
-            <option value="prefer_in_cloud">PREFER_IN_CLOUD</option>
-            <option value="only_on_device">ONLY_ON_DEVICE</option>
-            <option value="only_in_cloud">ONLY_IN_CLOUD</option>
+            <option value="prefer_on_device">Önce cihaz</option>
+            <option value="prefer_in_cloud">Önce bulut</option>
+            <option value="only_on_device">Yalnızca cihaz</option>
+            <option value="only_in_cloud">Yalnızca bulut</option>
           </select>
 
-          <label for="prompt">Prompt</label>
-          <textarea id="prompt" rows="3">Say hello in one short sentence.</textarea>
+          <label for="prompt">Mesaj</label>
+          <textarea id="prompt" rows="3">Bana tek cümleyle merhaba de.</textarea>
 
-          <button id="send" type="submit">Send</button>
+          <button id="send" type="submit">Gönder</button>
         </form>
 
         <output id="result" hidden>

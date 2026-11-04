@@ -40,7 +40,7 @@ function setUpAppCheck(): void {
 
   const siteKey = import.meta.env.VITE_RECAPTCHA_ENTERPRISE_SITE_KEY;
   if (!siteKey && !import.meta.env.DEV) {
-    console.warn("App Check site key is missing, so cloud requests will be rejected.");
+    console.warn("App Check site anahtarı eksik, bulut istekleri reddedilecek.");
     return;
   }
 

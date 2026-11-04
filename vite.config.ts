@@ -11,7 +11,7 @@ export default defineConfig({
       manifest: {
         name: "Lifeline",
         short_name: "Lifeline",
-        description: "Offline-first hybrid AI disaster assistant",
+        description: "Çevrimdışı öncelikli hibrit yapay zekâ afet asistanı",
         lang: "tr",
         start_url: "/",
         display: "standalone",
